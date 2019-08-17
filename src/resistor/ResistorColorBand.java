@@ -116,6 +116,54 @@ public class ResistorColorBand{
 		cacluationPanel.add(calulatedResistance);
 		
 		
+		
+		
+		 /*
+		  * Action Listener for # of bands buttons 
+		  */
+		 ActionListener numOfBandsListener = new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					
+					//System.out.println(e.getActionCommand());
+					// Capture which button was pressed
+					String selectedBandNumber = e.getActionCommand();
+					
+					// If band 3 button is pressed
+					if(selectedBandNumber.equals("3 Bands")) {
+						 System.out.println("Pressed");
+				    	 numberOfBands = 3;
+				    	 System.out.println("Number of bands selected: " + numberOfBands);
+				    	 switchToColorPanel(frame);
+				    	 bandIdentifier.setText("Select color for band (1/3)");
+					}
+					// If band 4 button is pressed
+					else if(selectedBandNumber.equals("4 Bands")) {
+						numberOfBands = 4;
+				    	//System.out.println("Number of bands selected: " + numberOfBands);
+				    	switchToColorPanel(frame);
+					    bandIdentifier.setText("Select color for band (1/4)");
+					}
+					// If band 5 button is pressed
+					else if(selectedBandNumber.equals("5 Bands")) {
+						numberOfBands = 5;
+				    	switchToColorPanel(frame);
+						bandIdentifier.setText("Select color for band (1/5)");
+					}
+					// If band 6 button is pressed
+					else if(selectedBandNumber.equals("6 Bands")) {
+						numberOfBands = 6;
+				    	switchToColorPanel(frame);
+						bandIdentifier.setText("Select color for band (1/6)");
+					}
+					
+					
+				}
+				
+			}; // End of action listener
+		 
+		
 		/*
 		 * Action listener for color buttons
 		 */
@@ -136,7 +184,8 @@ public class ResistorColorBand{
 			    	  System.out.println(actionEvent.getActionCommand());
 		    	  }
 		      }
-		 };
+		 }; // End of action listener
+		
 		
 		
 		/*
@@ -207,6 +256,22 @@ public class ResistorColorBand{
 		grayBtn.addActionListener(actionListener);
 		whiteBtn.addActionListener(actionListener);
 		
+		
+		/*
+		 * 4th Band Panel
+		 */
+		
+		/*
+		 * 5th Band Panel
+		 */
+		
+		/*
+		 * 6th Band Panel
+		 */
+		
+		
+		
+		
 		// Band Identifier Label
 		bandIdentifier = new JLabel("How many bands on the resistor?");
 		bandIdentifierPanel.add(bandIdentifier);
@@ -217,54 +282,11 @@ public class ResistorColorBand{
 		 * To be moved into one listener later
 		 */
 		// 3 bands
-		threeBandsBtn.addActionListener(new ActionListener()
-	    {
-		      public void actionPerformed(ActionEvent e)
-		      {
-		    	 
-		    	 System.out.println("Pressed");
-		    	 numberOfBands = 3;
-		    	 System.out.println("Number of bands selected: " + numberOfBands);
-		    	 switchToColorPanel(frame);
-		    	 bandIdentifier.setText("Select color for band (1/3)");
-		    	 
-		      }
-		});
 		
-		// 4 bands
-		fourBandsBtn.addActionListener(new ActionListener()
-	    {
-		      public void actionPerformed(ActionEvent e)
-		      {
-		    	numberOfBands = 4;
-		    	System.out.println("Number of bands selected: " + numberOfBands);
-		    	switchToColorPanel(frame);
-			    bandIdentifier.setText("Select color for band (1/4)");
-
-		      }
-		});
-		
-		//5 bands
-		fiveBandsBtn.addActionListener(new ActionListener()
-	    {
-		      public void actionPerformed(ActionEvent e)
-		      {
-		    	numberOfBands = 5;
-		    	switchToColorPanel(frame);
-				bandIdentifier.setText("Select color for band (1/5)");
-		      }
-		});
-		
-		//6 bands
-		sixBandsBtn.addActionListener(new ActionListener()
-	    {
-		      public void actionPerformed(ActionEvent e)
-		      {
-		    	numberOfBands = 6;
-		    	switchToColorPanel(frame);
-				bandIdentifier.setText("Select color for band (1/6)");
-		      }
-		});
+		threeBandsBtn.addActionListener(numOfBandsListener);
+		fourBandsBtn.addActionListener(numOfBandsListener);
+		fiveBandsBtn.addActionListener(numOfBandsListener);
+		sixBandsBtn.addActionListener(numOfBandsListener);
 		
 		/*
 		 * Menu listeners
