@@ -9,7 +9,7 @@ A 2019 remastered version of the project I created in highschool of 2012.
 
 ##New Version: (2019)
 
-![screenshot of program] https://imgur.com/kddSrF5 (Remastered Version)
+![screenshot of program] (https://imgur.com/kddSrF5 "Remastered Version")
 
 1. Button based (single use time FAST)
 2. Handles 3, 4, 5 and 6 band resistors.
