@@ -1,5 +1,6 @@
 # ResistorColorBandCalculator_Remastered
 A 2019 remastered version of the project I created in highschool of 2012.
+(Found here: https://github.com/danbiocchi/ResistorColorBandCalculator)
 
 ##Old Version: (2012)
 
