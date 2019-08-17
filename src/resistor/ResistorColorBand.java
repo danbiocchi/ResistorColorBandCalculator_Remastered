@@ -20,6 +20,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 
 public class ResistorColorBand{
 	
+	// Should have extended Frame and used constructor.
 	static JLabel bandIdentifier;
 	static JButton threeBandsBtn;
 	static JButton fourBandsBtn;
@@ -37,7 +38,7 @@ public class ResistorColorBand{
 	
 	
 	public static void main(String[] args) {
-
+		// Adjust look and feel
 		try {
 		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 		    	//System.out.println(info.getName());
@@ -171,8 +172,8 @@ public class ResistorColorBand{
 		
 		
 		
-		// Add listenrs to buttons.
 		
+		// Color button listener, used for grabbing color values for later math.
 		actionListener = new ActionListener()
 		 {
 		      public void actionPerformed(ActionEvent actionEvent) {
@@ -192,7 +193,7 @@ public class ResistorColorBand{
 		      }
 		 };
 		
-		
+		// Add listeners to buttons.
 		blackBtn.addActionListener(actionListener);
 		brownBtn.addActionListener(actionListener);
 		redBtn.addActionListener(actionListener);
@@ -210,6 +211,7 @@ public class ResistorColorBand{
 		
 		// Action Listeners 
 		// Logic for 3, 4, 5 and 6 bands
+		// 3 Bands
 		threeBandsBtn.addActionListener(new ActionListener()
 	    {
 		      public void actionPerformed(ActionEvent e)
@@ -224,14 +226,11 @@ public class ResistorColorBand{
 		      }
 		});
 		
-		
-		
 		// 4 bands
 		fourBandsBtn.addActionListener(new ActionListener()
 	    {
 		      public void actionPerformed(ActionEvent e)
 		      {
-		    	String band1,band2,band3,band4;
 		    	numberOfBands = 4;
 		    	System.out.println("Number of bands selected: " + numberOfBands);
 		    	switchToColorPanel(frame);
@@ -239,20 +238,24 @@ public class ResistorColorBand{
 
 		      }
 		});
+		
 		//5 bands
 		fiveBandsBtn.addActionListener(new ActionListener()
 	    {
 		      public void actionPerformed(ActionEvent e)
 		      {
+		    	numberOfBands = 5;
 		    	switchToColorPanel(frame);
 				bandIdentifier.setText("Select color for band (1/5)");
 		      }
 		});
+		
 		//6 bands
 		sixBandsBtn.addActionListener(new ActionListener()
 	    {
 		      public void actionPerformed(ActionEvent e)
 		      {
+		    	numberOfBands = 6;
 		    	switchToColorPanel(frame);
 				bandIdentifier.setText("Select color for band (1/6)");
 		      }
@@ -264,6 +267,9 @@ public class ResistorColorBand{
             	frame.remove(colorSelectionPanel);
             	frame.add(bandSelectionPanel);
             	bandIdentifier.setText("How many bands on the resistor?");
+            	// Reset variables used in calculations
+            	numberOfBands = 0;
+                bandCount = 1;
 				frame.validate();
 				frame.repaint();
             }
