@@ -85,35 +85,64 @@ public class ResistorColorBand{
 		bandIdentifierPanel = new JPanel();
 		bandSelectionPanel = new JPanel(new GridLayout(1,4,10,10));
 		
-		//Panel to ask how many bands
+		/*
+		 * Band Selection Panel
+		 */
+		
 		threeBandsBtn = new JButton("3 Bands");
 		fourBandsBtn = new JButton("4 Bands");
 		fiveBandsBtn = new JButton("5 Bands");
 		sixBandsBtn = new JButton("6 Bands");
-		
 		bandSelectionPanel.add(threeBandsBtn);
 		bandSelectionPanel.add(fourBandsBtn);
 		bandSelectionPanel.add(fiveBandsBtn);
 		bandSelectionPanel.add(sixBandsBtn);
-		// Remove the ugly focused paint on the buttons
-		threeBandsBtn.setFocusPainted(false);
+		threeBandsBtn.setFocusPainted(false); // Remove ugly focused paint
 		fourBandsBtn.setFocusPainted(false);
 		fiveBandsBtn.setFocusPainted(false);
 		sixBandsBtn.setFocusPainted(false);
 		
 		
+
 		
-		// Panel to paint what the band should look like underneath band selection
-		ActionListener actionListener;
 		
-		// Panel for displaying Calculated resistance
+		
+		/*
+		 * Displaying resistance calculation Panel
+		 */
 		JLabel calculationText = new JLabel("Resistance of the band: ");
 		JLabel calulatedResistance = new JLabel("Waiting.. Ω");
 		cacluationPanel.add(calculationText);
 		cacluationPanel.add(calulatedResistance);
 		
-		// Color Selection Panel for digits.
-		// Create buttons and change color to correspond.
+		
+		/*
+		 * Action listener for color buttons
+		 */
+		ActionListener actionListener = new ActionListener()
+		 {
+		      public void actionPerformed(ActionEvent actionEvent) {
+		    	  if(bandCount >= numberOfBands) {
+		    		  removeColorPanel(frame);
+		    		  //System.out.println(bandCount + " " + numberOfBands);
+			    	  bandIdentifier.setText("See calculation below..");
+			          System.out.println(actionEvent.getActionCommand());
+
+				  }
+		    	  else {
+		    		  bandCount++;
+			    	  bandIdentifier.setText("Select color for band (" + bandCount +
+			    			  "/" + numberOfBands + ")");
+			    	  System.out.println(actionEvent.getActionCommand());
+		    	  }
+		      }
+		 };
+		
+		
+		/*
+		 * Band Color selection for bands 1-3 Panel 
+		 */
+			//Black
 		JButton blackBtn = new JButton("Black");
 		blackBtn.setBackground(Color.black);
 		blackBtn.setForeground(Color.white);
@@ -147,8 +176,7 @@ public class ResistorColorBand{
 			// White
 		JButton whiteBtn = new JButton("White");
 		whiteBtn.setBackground(Color.white);
-		// Remove the ugly focused paint on the buttons
-		blackBtn.setFocusPainted(false);
+		blackBtn.setFocusPainted(false); // Remove the ugly focused paint on the buttons
 		brownBtn.setFocusPainted(false);
 		redBtn.setFocusPainted(false);
 		orangeBtn.setFocusPainted(false);
@@ -158,7 +186,6 @@ public class ResistorColorBand{
 		purpleBtn.setFocusPainted(false);
 		grayBtn.setFocusPainted(false);
 		whiteBtn.setFocusPainted(false);
-		// Add the components
 		colorSelectionPanel.add(blackBtn);
 		colorSelectionPanel.add(brownBtn);
 		colorSelectionPanel.add(redBtn);
@@ -169,31 +196,6 @@ public class ResistorColorBand{
 		colorSelectionPanel.add(purpleBtn);
 		colorSelectionPanel.add(grayBtn);
 		colorSelectionPanel.add(whiteBtn);
-		
-		
-		
-		
-		// Color button listener, used for grabbing color values for later math.
-		actionListener = new ActionListener()
-		 {
-		      public void actionPerformed(ActionEvent actionEvent) {
-		    	  if(bandCount >= numberOfBands) {
-		    		  removeColorPanel(frame);
-		    		  //System.out.println(bandCount + " " + numberOfBands);
-			    	  bandIdentifier.setText("See calculation below..");
-			          System.out.println(actionEvent.getActionCommand());
-
-				  }
-		    	  else {
-		    		  bandCount++;
-			    	  bandIdentifier.setText("Select color for band (" + bandCount +
-			    			  "/" + numberOfBands + ")");
-			    	  System.out.println(actionEvent.getActionCommand());
-		    	  }
-		      }
-		 };
-		
-		// Add listeners to buttons.
 		blackBtn.addActionListener(actionListener);
 		brownBtn.addActionListener(actionListener);
 		redBtn.addActionListener(actionListener);
@@ -209,9 +211,12 @@ public class ResistorColorBand{
 		bandIdentifier = new JLabel("How many bands on the resistor?");
 		bandIdentifierPanel.add(bandIdentifier);
 		
-		// Action Listeners 
-		// Logic for 3, 4, 5 and 6 bands
-		// 3 Bands
+
+		/*
+		 * Action listeners band # buttons 3,4,5, and 6.
+		 * To be moved into one listener later
+		 */
+		// 3 bands
 		threeBandsBtn.addActionListener(new ActionListener()
 	    {
 		      public void actionPerformed(ActionEvent e)
@@ -261,7 +266,9 @@ public class ResistorColorBand{
 		      }
 		});
 		
-		// Menu listeners
+		/*
+		 * Menu listeners
+		 */
 		menuItemReset.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	frame.remove(colorSelectionPanel);
@@ -285,25 +292,23 @@ public class ResistorColorBand{
 
         });
 		
-		// Color clicked logic
 		
 		
-		
-		
-		
-		// Add components to frame then Set Visible
+		/*
+		 * Final frame packaging
+		 */
 		frame.setJMenuBar(menuBar);
 		frame.add(containerPanel);
 		frame.add(BorderLayout.NORTH, bandIdentifierPanel);
 		frame.add(bandSelectionPanel);
-		//frame.add(colorSelectionPanel);
 		frame.add(BorderLayout.SOUTH, cacluationPanel);
 		frame.setVisible(true);
-		
 
-		
 	}
 	
+	/*
+	 * Helper methods to reduce code re-use.
+	 */
 	private static void switchToColorPanel(JFrame frame) {
 		frame.remove(bandSelectionPanel);
    	 	frame.add(colorSelectionPanel);
