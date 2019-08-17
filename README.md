@@ -9,7 +9,7 @@ A 2019 remastered version of the project I created in highschool of 2012.
 
 ##New Version: (2019)
 
-![screenshot of program] (https://github.com/danbiocchi/ResistorColorBandCalculator_Remastered/blob/master/Screenshot%20from%202019-08-16%2023-30-30.png?raw=true" Remastered Version")
+![](https://i.imgur.com/kddSrF5.png)
 
 1. Button based (single use time FAST)
 2. Handles 3, 4, 5 and 6 band resistors.
