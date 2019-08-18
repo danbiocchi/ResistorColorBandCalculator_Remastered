@@ -258,6 +258,7 @@ public class ResistorColorBand{
 			    	  else if((bandCount) == 5) { // 6th band
 			    		  switch(numberOfBands) {
 				    	  case 6:
+				    		  switchToTcrPanel(frame);
 				    		  break;
 				    	  }
 			    	  }
@@ -524,16 +525,14 @@ public class ResistorColorBand{
 	
 	private static void switchToTcrPanel(JFrame frame) {
 		System.out.println("Switching to multiply panel");
-		toleranceBandPanel.add(blackBtn);
-		toleranceBandPanel.add(brownBtn);
-		toleranceBandPanel.add(greenBtn);
-		toleranceBandPanel.add(blueBtn);
-		toleranceBandPanel.add(violetBtn);
-		toleranceBandPanel.add(grayBtn);
-		toleranceBandPanel.add(goldBtn);
-		toleranceBandPanel.add(silverBtn);
-		frame.remove(multiplierBandPanel);
-   	 	frame.add(toleranceBandPanel);
+		tcrBandPanel.add(blackBtn);
+		tcrBandPanel.add(brownBtn);
+		tcrBandPanel.add(redBtn);
+		tcrBandPanel.add(orangeBtn);
+		tcrBandPanel.add(blueBtn);
+		tcrBandPanel.add(violetBtn);
+		frame.remove(toleranceBandPanel);
+   	 	frame.add(tcrBandPanel);
 		frame.validate();
    	 	frame.repaint();
 	}
@@ -560,6 +559,9 @@ public class ResistorColorBand{
 		}
 		if(toleranceBandPanel.isDisplayable()) {
 			frame.remove(toleranceBandPanel);
+		}
+		if(tcrBandPanel.isDisplayable()) {
+			frame.remove(tcrBandPanel);
 		}
 		
 		frame.validate();
