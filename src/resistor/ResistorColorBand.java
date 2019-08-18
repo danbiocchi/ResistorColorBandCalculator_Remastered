@@ -83,8 +83,61 @@ public class ResistorColorBand{
 	/* CREATE THE GUI */
 	private static void createAndGenerateGUI(){
 		
+		
+		 /*
+		  * =^=^=^=^=^=^=^=^=^=^=^=^=^=^=^=^=^=^
+		  * ORANIZATION OF createAndGenerateGUI
+		  * =^=^=^=^=^=^=^=^=^=^=^=^=^=^=^=^=^=^
+		  * 	(THE FOLLOWING CODE WILL READ AS THE PROGRAM GUI ITSELF LOOKS;
+		  * 	 THE TOP CODE IS PARTS NEAR THE TOP OF THE GUI AND THE BOTTOM 
+		  * 	CODE IS CODE RELEATING TO THE BOTTOM OF THE GUI)
+		  * 	THE GUI AND CODE:
+		  * 	+---------------------------+
+		  *		|          NAV BAR          | --> The Navbar will stay static.
+		  *		+---+--------------------+--+
+		  *		|   |      INFO BAR      |  | --> This panel will stay static and display info accordingly.
+		  *		+---+--------------------+--+
+		  *		|                           |
+		  *		|                           |
+		  *		|        Button Panel       | --> This panel will swap often depending on current band being asked.
+		  *		|                           |
+		  *		|                           |
+		  *		+---+--------------------+--+
+		  *		|   | CALCULATION PANEL  |  | --> This panel will not change until the user has inputted all required bands
+		  *		+---+--------------------+--+
+		  * 
+		  * == Code sections ==
+		  * JFRAME CREATION
+		  * MENU BAR (RESET & HELP)
+		  * ACTION LISTENERS FOR MENU BAR
+		  * PANEL INITIALIZATION 
+		  * NORTH PANEL (INFO BAR)
+		  * ACTIONS LISTENERS:
+		  *  1. # OF BANDS BUTTONS
+		  *  2. COLOR BUTTONS
+		  *  
+		  * 	(NEXT IS THE CREATION OF CHILD COMPONENTS AND STYLING FOR THE CENTER PANELS, THESE PANELS WILL CHANGE THROUGHOUT THE PROGRAM RUNTIME)
+		  * 	* - difference in total bands effects which each band will represent
+		  * 	** - in order to create less button components buttons are re-used by shifting the buttons to difference panels using helper methods below main method.
+		  * LANDING PANEL:
+		  *  1. PANEL FOR BAND NUMBER SELECTION
+		  * BUTTON PANELS:
+		  *  1. PANEL FOR BAND 1-(2 OR 3) *
+		  *  2. PANEL FOR BAND 3 OR 4 *
+		  *  3. PANEL FOR BAND 4 OR 5 * **
+		  *  4. PANEL FOR BAND 6 **
+		  * 
+		  * SOUTH PANEL (CALCULATION BAR)
+		  * FINAL FRAME PACKAGING
+		  * 
+		  * HELPER METHODS
+		  */ 
+		
 		/*
-		 * JFrame Creation
+		 * ========================================
+		 * JFRAME CREATION
+		 * ========================================
+		 * Create parent component and set styles and mods.
 		 */
 		JFrame frame = new JFrame("Resistor Band Calculator");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -93,19 +146,54 @@ public class ResistorColorBand{
 		
 		
 		/*
-		 * Menu bar and Menu item creation
+		 * ========================================
+		 * MENU BAR
+		 * ========================================
+		 * File
+		 *  > Reset [Resets to band # selection panel]
+		 *  > Help [Display help message]
 		 */
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menu = new JMenu("File");
 		JMenuItem menuItemReset = new JMenuItem("Reset");
 		JMenuItem menuItemHelp = new JMenuItem("Help");
-			// Add Menu Items to menu bar
-			menu.add(menuItemReset);
-			menu.add(menuItemHelp);
-			menuBar.add(menu);
+		menu.add(menuItemReset);
+		menu.add(menuItemHelp);
+		menuBar.add(menu);
+		
 		
 		/*
-		 * Panel Creation
+		 * ========================================
+		 * ACTION LISTENERS FOR MENU BAR
+		 * ========================================
+		 */
+		menuItemReset.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	removeAllPanels(frame);
+            	frame.add(bandSelectionPanel);
+            	bandIdentifier.setText("How many bands on the resistor?");
+            	// Reset variables used in calculations
+            	numberOfBands = 0;
+                bandCount = 0;
+				frame.validate();
+				frame.repaint();
+            }
+
+        });
+		menuItemHelp.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	JOptionPane.showMessageDialog(null, "Program for caluclating "
+            			+ "the resistance of electrical resistors designed and coded"
+            			+ "by Daniel Biocchi");
+            }
+
+        });
+		
+		
+		/*
+		 * ========================================
+		 * PANEL INITALIZATION
+		 * ========================================
 		 */
 		containerPanel = new JPanel(new BorderLayout());
 		cacluationPanel = new JPanel(new FlowLayout());
@@ -116,35 +204,25 @@ public class ResistorColorBand{
 		toleranceBandPanel = new JPanel(new GridLayout(0,2)); // Band 4 or 5
 		tcrBandPanel = new JPanel(new GridLayout(0,2)); // Band 6
 		
+	
+		/*
+		 * ========================================
+		 * NORTH PANEL (Below MenuBar)
+		 * ========================================
+		 * Displaying which band the user is currently entering and other misc info.
+		 */
+		bandIdentifier = new JLabel("How many bands on the resistor?");
+		bandIdentifierPanel.add(bandIdentifier);
+		
+
 		
 		/*
-		 * Band Selection Panel
+		 * ========================================
+		 * AL 1. Listeners for # of buttons panel
+		 * ========================================
+		 * Action Listener for # of bands buttons 
+		 * Handles variable initialization
 		 */
-		threeBandsBtn = new JButton("3 Bands");
-		fourBandsBtn = new JButton("4 Bands");
-		fiveBandsBtn = new JButton("5 Bands");
-		sixBandsBtn = new JButton("6 Bands");
-		bandSelectionPanel.add(threeBandsBtn);
-		bandSelectionPanel.add(fourBandsBtn);
-		bandSelectionPanel.add(fiveBandsBtn);
-		bandSelectionPanel.add(sixBandsBtn);
-		threeBandsBtn.setFocusPainted(false); // Remove ugly focused paint
-		fourBandsBtn.setFocusPainted(false);
-		fiveBandsBtn.setFocusPainted(false);
-		sixBandsBtn.setFocusPainted(false);
-		
-		/*
-		 * Displaying resistance calculation Panel
-		 */
-		JLabel calculationText = new JLabel("Resistance of the band: ");
-		JLabel calulatedResistance = new JLabel("Waiting.. Ω");
-		cacluationPanel.add(calculationText);
-		cacluationPanel.add(calulatedResistance);
-		
-		
-		 /*
-		  * Action Listener for # of bands buttons 
-		  */
 		 ActionListener numOfBandsListener = new ActionListener() {
 
 				@Override
@@ -190,15 +268,17 @@ public class ResistorColorBand{
 		 
 		
 		/*
-		 * Action listener for color buttons
-		 */
+		* ========================================
+		* AL 2. LISTENER FOR COLOR BUTTONS
+		* ========================================
+		* Action Listener for which color is selected
+		* Handles program runtime logic
+		*/
 		ActionListener actionListener = new ActionListener()
 		 {
 		      public void actionPerformed(ActionEvent actionEvent) {
 		    	  System.out.println("In Action : band count: " + bandCount);
 		    	  
-		    	  
-
 		    	  
 		    	  if(bandCount == (numberOfBands-1)) {
 		    		  bandArray[bandCount] = actionEvent.getActionCommand();
@@ -272,9 +352,34 @@ public class ResistorColorBand{
 		 }; // End of action listener
 		
 		
+		/*
+		* ========================================
+		* LP - 1. PANEL FOR BAND # SELECTION
+		* ========================================
+		*/
+		 
+		threeBandsBtn = new JButton("3 Bands");
+		fourBandsBtn = new JButton("4 Bands");
+		fiveBandsBtn = new JButton("5 Bands");
+		sixBandsBtn = new JButton("6 Bands");
+		bandSelectionPanel.add(threeBandsBtn);
+		bandSelectionPanel.add(fourBandsBtn);
+		bandSelectionPanel.add(fiveBandsBtn);
+		bandSelectionPanel.add(sixBandsBtn);
+		threeBandsBtn.setFocusPainted(false); // Remove ugly focused paint
+		fourBandsBtn.setFocusPainted(false);
+		fiveBandsBtn.setFocusPainted(false);
+		sixBandsBtn.setFocusPainted(false);
+		threeBandsBtn.addActionListener(numOfBandsListener);
+		fourBandsBtn.addActionListener(numOfBandsListener);
+		fiveBandsBtn.addActionListener(numOfBandsListener);
+		sixBandsBtn.addActionListener(numOfBandsListener);
+		 
 		
 		/*
-		 * Band Color selection for bands 1-2 or 3 Panel 
+		 * ========================================
+		 * BP - 1. PANEL FOR BAND 1-(2 OR 3) *
+		 * ========================================
 		 * Black - Created below
 		 * Brown - Created below
 		 * Red - Created below
@@ -324,16 +429,6 @@ public class ResistorColorBand{
 		violetBtn.setFocusPainted(false);
 		grayBtn.setFocusPainted(false);
 		whiteBtn.setFocusPainted(false);
-		colorSelectionPanel.add(blackBtn); // Add to panel
-		colorSelectionPanel.add(brownBtn);
-		colorSelectionPanel.add(redBtn);
-		colorSelectionPanel.add(orangeBtn);
-		colorSelectionPanel.add(yellowBtn);
-		colorSelectionPanel.add(greenBtn);
-		colorSelectionPanel.add(blueBtn);
-		colorSelectionPanel.add(violetBtn);
-		colorSelectionPanel.add(grayBtn);
-		colorSelectionPanel.add(whiteBtn);
 		blackBtn.addActionListener(actionListener); // Add listeners
 		brownBtn.addActionListener(actionListener);
 		redBtn.addActionListener(actionListener);
@@ -347,7 +442,10 @@ public class ResistorColorBand{
 		
 		
 		/*
-		 * Band 2 or 4 (MULTIPLIER BAND)
+		 * ========================================
+		 * BP - 2. PANEL FOR BAND 1-(2 OR 3) *
+		 * ========================================
+		 * (MULTIPLIER BAND)
 		 * Black
 		 * Brown
 		 * Red
@@ -375,16 +473,17 @@ public class ResistorColorBand{
 		
 		
 		/*
-		 * 4th or 5th Band Panel (TOLERANCE BAND)
-		 * 
+		 * ========================================
+		 * BP - 3. PANEL FOR BAND 4 OR 5 *
+		 * ========================================
 		 * Silver
 		 * Gold
-		 * Brn
+		 * Brown
 		 * Red
-		 * Gren
+		 * Green
 		 * Blue
 		 * Violet
-		 * BUTTONS ALREADY CREATED ABOVE, METHODS WILL ARRANGE THIS PANEL
+		 * BUTTONS ALREADY CREATED ABOVE, METHODS WILL ARRANGE THIS PANEL UNDER MAIN SEE EXPLANTION ABOVE **
 		 */
 		
 		
@@ -395,57 +494,27 @@ public class ResistorColorBand{
 		 * Red
 		 * Orange
 		 * Yellow
-		 * BUTTONS ALREADY CREATED ABOVE, METHODS WILL ARRANGE THIS PANEL
+		 * BUTTONS ALREADY CREATED ABOVE, METHODS WILL ARRANGE THIS PANEL UNDER MAIN SEE EXPLANTION ABOVE **
 		 */
 		
-		
-		
-		
-		// Band Identifier Label
-		bandIdentifier = new JLabel("How many bands on the resistor?");
-		bandIdentifierPanel.add(bandIdentifier);
-		
-
-		/*
-		 * Action listeners band # buttons 3,4,5, and 6.
-		 * To be moved into one listener later
-		 */
-		// 3 bands
-		
-		threeBandsBtn.addActionListener(numOfBandsListener);
-		fourBandsBtn.addActionListener(numOfBandsListener);
-		fiveBandsBtn.addActionListener(numOfBandsListener);
-		sixBandsBtn.addActionListener(numOfBandsListener);
 		
 		/*
-		 * Menu listeners
+		 * ========================================
+		 * SOUTH PANEL (Below center panel)
+		 * ========================================
+		 * Displaying resistance calculation Panel
 		 */
-		menuItemReset.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	frame.remove(colorSelectionPanel);
-            	frame.add(bandSelectionPanel);
-            	bandIdentifier.setText("How many bands on the resistor?");
-            	// Reset variables used in calculations
-            	numberOfBands = 0;
-                bandCount = 0;
-				frame.validate();
-				frame.repaint();
-            }
-
-        });
-		menuItemHelp.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	JOptionPane.showMessageDialog(null, "Program for caluclating "
-            			+ "the resistance of electrical resistors designed and coded"
-            			+ "by Daniel Biocchi");
-            }
-
-        });
+		JLabel calculationText = new JLabel("Resistance of the band: ");
+		JLabel calulatedResistance = new JLabel("Waiting.. Ω");
+		cacluationPanel.add(calculationText);
+		cacluationPanel.add(calulatedResistance);
 		
 		
 		
 		/*
-		 * Final frame packaging
+		 * ========================================
+		 * FINAL FRAME PACKAGING
+		 * ========================================
 		 */
 		frame.setJMenuBar(menuBar);
 		frame.add(containerPanel);
@@ -456,11 +525,28 @@ public class ResistorColorBand{
 
 	}
 	
+	
+	
+	
 	/*
+	 * ====================================
 	 * Helper methods to reduce code re-use.
+	 * ====================================
 	 */
 	private static void calculateResistance(String[] arr) {
-		
+		System.out.println("Array size: " + arr.length);
+		if(arr.length == 3) { // 3 Bands
+			
+		}
+		else if(arr.length == 4) {
+			
+		}
+		else if(arr.length == 5) {
+			
+		}
+		else if(arr.length == 6) {
+			
+		}
 	}
 	
 	
@@ -544,7 +630,16 @@ public class ResistorColorBand{
 		if(bandSelectionPanel.isDisplayable()) {
 			frame.remove(bandSelectionPanel);
 		}
-		
+		colorSelectionPanel.add(blackBtn); // Add to panel
+		colorSelectionPanel.add(brownBtn);
+		colorSelectionPanel.add(redBtn);
+		colorSelectionPanel.add(orangeBtn);
+		colorSelectionPanel.add(yellowBtn);
+		colorSelectionPanel.add(greenBtn);
+		colorSelectionPanel.add(blueBtn);
+		colorSelectionPanel.add(violetBtn);
+		colorSelectionPanel.add(grayBtn);
+		colorSelectionPanel.add(whiteBtn);
    	 	frame.add(colorSelectionPanel);
    	 	frame.validate();
    	 	frame.repaint();
