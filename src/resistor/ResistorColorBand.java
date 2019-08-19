@@ -10,6 +10,8 @@ import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.RoundRectangle2D;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -831,10 +833,56 @@ public class ResistorColorBand{
 		}
 		
 		
-		// Methods, constructors, fields.
+		
+		/*
+		 * ==============================
+		 * DRAW THE BAND
+		 * ==============================
+		 * You better believe this was tedious
+		 */
 	    @Override public void paintComponent(Graphics g) {
-	         super.paintComponent(g);    // paints background
-	         g.draw3DRect(100, 150, numberOfBands, 50, true);
+	         super.paintComponent(g);
+	         Graphics2D g2d = (Graphics2D) g.create();
+	         // Draw resistor wire
+	         g2d.setColor(Color.gray);
+	         Rectangle2D wireRect = new Rectangle2D.Double(
+	        		 /*left to right*/1, 
+	        		 /*up an down*/getHeight()*.35, 
+	        		 /*width*/getWidth()-1, 
+	        		 /*height*/getHeight()*.2);
+	         
+	         g2d.fill(wireRect);
+	         
+	         //Draw resistor
+	         g2d.setColor(new Color(255,241,202));
+	         Rectangle2D bandRect = new Rectangle2D.Double(
+	        		 /*left to right*/(getWidth()*.25), 
+	        		 /*up an down*/getHeight()*.3, 
+	        		 /*width*/(getWidth()*.55), 
+	        		 /*height*/getHeight()*.3);
+	         
+	         g2d.fill(bandRect);
+	         
+	         // Draw resistor ends
+	         RoundRectangle2D leftBandRect = new RoundRectangle2D.Double
+	        		 (/*left to right*/(getWidth() *.15), 
+	        		/*up an down*/getHeight()*.22, 
+	        		/*width*/getWidth()*.15, 
+	        		/*height*/getHeight()*.45, 
+	        		/*corner rounding*/10.0, 
+	        		/*corner rounding*/10.0);
+	         g2d.fill(leftBandRect);
+	         
+	         RoundRectangle2D rightBandRect = new RoundRectangle2D.Double
+	        		 (/*left to right*/(getWidth() * 0.70), 
+	        		 /*up an down*/getHeight()*.22, 
+	        		 /*width*/getWidth()*.15, 
+	        		 /*height*/getHeight()*.45, 
+	        		 /*corner rounding*/10.0, 
+	        		 /*corner rounding*/10.0);
+	         //g2d.setColor(Color.red);
+	         g2d.fill(rightBandRect);
+	         
 	         System.out.println("Number of bands: " + numberOfBands);
 	         System.out.println("Array: " + Arrays.toString(bandArr));
 	         // do your drawing here
