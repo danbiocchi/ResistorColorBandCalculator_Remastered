@@ -7,6 +7,8 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -47,6 +49,11 @@ public class ResistorColorBand{
 	static JButton blackBtn;
 	static JButton silverBtn; // Multiply Buttons creation
 	static JButton goldBtn;
+	static JLabel calculatedResistance;
+	static Map<String, String> digitBandMap = new HashMap<>();
+	static Map<String, Double> multiplyBandMap = new HashMap<>();
+	static Map<String, Double> toleranceBandMap = new HashMap<>();
+	static Map<String, Integer> tcrBandMap = new HashMap<>();
 	
 	// Variables used for calculations
     static int numberOfBands = 0;
@@ -67,6 +74,13 @@ public class ResistorColorBand{
 			System.out.print("Nimbus Unavailbe.");
 		}
 		
+		try {
+			generateMapData();
+		} catch(Exception e2){
+			System.out.println("Failed to generate band data.");
+		}
+		
+		
 		// Build GUI
 		try {
 			createAndGenerateGUI();
@@ -80,10 +94,15 @@ public class ResistorColorBand{
 	
 	
 	
+
+
+
+
+
+
 	/* CREATE THE GUI */
 	private static void createAndGenerateGUI(){
-		
-		
+
 		 /*
 		  * =^=^=^=^=^=^=^=^=^=^=^=^=^=^=^=^=^=^
 		  * ORANIZATION OF createAndGenerateGUI
@@ -505,9 +524,9 @@ public class ResistorColorBand{
 		 * Displaying resistance calculation Panel
 		 */
 		JLabel calculationText = new JLabel("Resistance of the band: ");
-		JLabel calulatedResistance = new JLabel("Waiting.. Ω");
+		calculatedResistance = new JLabel("Waiting.. Ω");
 		cacluationPanel.add(calculationText);
-		cacluationPanel.add(calulatedResistance);
+		cacluationPanel.add(calculatedResistance);
 		
 		
 		
@@ -532,19 +551,61 @@ public class ResistorColorBand{
 	 * ====================================
 	 * Helper methods to reduce code re-use.
 	 * ====================================
+	 * The string array passed will be the size of the amount of bands selected from 
+	 * the band selection panel
+	 * and will contain the corresponding color for each band.
 	 */
 	private static void calculateResistance(String[] arr) {
+		String strAnswer;
+		Double answer;
+		System.out.println("=========================");
 		System.out.println("Array size: " + arr.length);
+		System.out.println("Array contents: " + Arrays.toString(arr));
 		if(arr.length == 3) { // 3 Bands
+			// Band 1 + band2
+			strAnswer = digitBandMap.get(arr[0].toLowerCase()) 
+					+ digitBandMap.get(arr[1].toLowerCase());
 			
+			// (Band1 + Band2) * Band3
+			answer = Double.valueOf(strAnswer) * multiplyBandMap.get(arr[2].toLowerCase());
+			System.out.println("Value of : " + arr[0] + " = " + digitBandMap.get(arr[0].toLowerCase()));
+			System.out.println("Value of : " + arr[1] + " = " + digitBandMap.get(arr[1].toLowerCase()));
+			System.out.println("Value of : " + arr[2] + " = " + multiplyBandMap.get(arr[2].toLowerCase()));
+			calculatedResistance.setText(getAnswerAndUnitOfMeasure(answer) + " ±" + toleranceBandMap.get("none") + "%");
+
 		}
-		else if(arr.length == 4) {
-			
+		else if(arr.length == 4) { // 4 bands
+			// Band 1 + band2
+			strAnswer = digitBandMap.get(arr[0].toLowerCase()) 
+					+ digitBandMap.get(arr[1].toLowerCase());
+			System.out.println("String answer" + strAnswer);
+			// (Band1 + Band2) * Band3
+			answer = Double.valueOf(strAnswer) * multiplyBandMap.get(arr[2].toLowerCase());
+			System.out.println("Double answer" + answer);
+			calculatedResistance.setText(getAnswerAndUnitOfMeasure(answer) + " ±" + toleranceBandMap.get(arr[3].toLowerCase()) + "%");
+
 		}
 		else if(arr.length == 5) {
-			
+			// Band1 + band2 + band3 
+			strAnswer = digitBandMap.get(arr[0].toLowerCase()) 
+								+ digitBandMap.get(arr[1].toLowerCase())
+								+ digitBandMap.get(arr[2].toLowerCase());
+			// (Band 1 + band2 + band3) * band4
+			answer = Double.valueOf(strAnswer) * multiplyBandMap.get(arr[3].toLowerCase());
+			// ((Band 1 + band2 + band3) * band4) ± band5% 
+			calculatedResistance.setText(getAnswerAndUnitOfMeasure(answer) + " ±" + toleranceBandMap.get(arr[4].toLowerCase()) + "%");
 		}
 		else if(arr.length == 6) {
+			// Band1 + band2 + band3 
+			strAnswer = digitBandMap.get(arr[0].toLowerCase()) 
+						+ digitBandMap.get(arr[1].toLowerCase())
+						+ digitBandMap.get(arr[2].toLowerCase());
+			// (Band 1 + band2 + band3) * band4
+			answer = Double.valueOf(strAnswer) * multiplyBandMap.get(arr[3].toLowerCase());
+			// ((Band 1 + band2 + band3) * band4) ± band5% band6 ppm
+			calculatedResistance.setBackground(Color.white);
+			calculatedResistance.setText(getAnswerAndUnitOfMeasure(answer) + " ±" + toleranceBandMap.get(arr[4].toLowerCase()) + "% "
+					+ tcrBandMap.get(arr[5].toLowerCase()) + "ppm");
 			
 		}
 	}
@@ -586,12 +647,12 @@ public class ResistorColorBand{
 	
 	private static void switchToTolerancePanel(JFrame frame) {
 		System.out.println("Switching to multiply panel");
-		toleranceBandPanel.add(blackBtn);
+		toleranceBandPanel.add(redBtn);
 		toleranceBandPanel.add(brownBtn);
-		toleranceBandPanel.add(greenBtn);
 		toleranceBandPanel.add(blueBtn);
-		toleranceBandPanel.add(violetBtn);
+		toleranceBandPanel.add(greenBtn);
 		toleranceBandPanel.add(grayBtn);
+		toleranceBandPanel.add(violetBtn);
 		toleranceBandPanel.add(goldBtn);
 		toleranceBandPanel.add(silverBtn);
 		frame.remove(multiplierBandPanel);
@@ -611,12 +672,14 @@ public class ResistorColorBand{
 	
 	private static void switchToTcrPanel(JFrame frame) {
 		System.out.println("Switching to multiply panel");
-		tcrBandPanel.add(blackBtn);
-		tcrBandPanel.add(brownBtn);
 		tcrBandPanel.add(redBtn);
+		tcrBandPanel.add(brownBtn);
+		tcrBandPanel.add(yellowBtn);
 		tcrBandPanel.add(orangeBtn);
 		tcrBandPanel.add(blueBtn);
 		tcrBandPanel.add(violetBtn);
+		
+		
 		frame.remove(toleranceBandPanel);
    	 	frame.add(tcrBandPanel);
 		frame.validate();
@@ -661,6 +724,75 @@ public class ResistorColorBand{
 		
 		frame.validate();
    	 	frame.repaint();
+	}
+	
+	
+	private static String getAnswerAndUnitOfMeasure(Double answer) {
+		String uom = null;
+		if (answer < 1000){
+		    uom = " Ω";
+		}
+		else if (answer >= 1000)
+		{
+		    uom = " kiloΩ";
+		    answer = answer / 1000;
+		}
+		else if (answer >= 1000000)
+		{
+		    uom = " megaΩ";
+		    answer = answer / 1000000;
+		}
+		return answer + uom;
+	}
+	
+	
+	
+	private static void generateMapData() {
+		// Bands 1-(2 or 3)
+		digitBandMap.put("black", "0");
+		digitBandMap.put("brown", "1");
+		digitBandMap.put("red", "2");
+		digitBandMap.put("orange", "3");
+		digitBandMap.put("yellow", "4");
+		digitBandMap.put("green", "5");
+		digitBandMap.put("blue", "6");
+		digitBandMap.put("violet", "7");
+		digitBandMap.put("great", "8");
+		digitBandMap.put("white", "9");
+		
+		// Band 2 or 4
+		multiplyBandMap.put("black", Math.pow(10,0));
+		multiplyBandMap.put("brown", Math.pow(10,1));
+		multiplyBandMap.put("red", Math.pow(10,2));
+		multiplyBandMap.put("orange", Math.pow(10,3));
+		multiplyBandMap.put("yellow", Math.pow(10,4));
+		multiplyBandMap.put("green", Math.pow(10,5));
+		multiplyBandMap.put("blue", Math.pow(10,6));
+		multiplyBandMap.put("violet", Math.pow(10,7));
+		multiplyBandMap.put("gray", Math.pow(10,8));
+		multiplyBandMap.put("white", Math.pow(10,9));
+		multiplyBandMap.put("gold", Math.pow(10,-1));
+		multiplyBandMap.put("silver", Math.pow(10,-2));
+		
+		// Band 4 or 5
+		toleranceBandMap.put("brown",1.0);
+		toleranceBandMap.put("red",2.0);
+		toleranceBandMap.put("green",0.5);
+		toleranceBandMap.put("blue",0.25);
+		toleranceBandMap.put("violet",0.1);
+		toleranceBandMap.put("gray",0.05);
+		toleranceBandMap.put("gold",5.0);
+		toleranceBandMap.put("silver",10.0);
+		toleranceBandMap.put("none",20.0); // ??????????????????????????????
+		
+		// Band 6
+		tcrBandMap.put("brown",100);
+		tcrBandMap.put("red",50);
+		tcrBandMap.put("orange",15);
+		tcrBandMap.put("yellow",25);
+		tcrBandMap.put("blue",10);
+		tcrBandMap.put("violet",5);
+		
 	}
 	
 }
