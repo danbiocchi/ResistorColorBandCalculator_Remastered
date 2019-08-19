@@ -17,7 +17,7 @@ A 2019 remastered version of the project I created in highschool of 2012.
 
 ![](https://i.imgur.com/0mExuVC.png)
 ![](https://i.imgur.com/kddSrF5.png)
-![](https://i.imgur.com/VUX79RL.png)
+![](https://i.imgur.com/HYpxNK8.png)
 
 [Unfinished feature: band drawing - see enhcancements sections]
 
