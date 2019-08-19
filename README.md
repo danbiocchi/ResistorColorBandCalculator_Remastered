@@ -2,7 +2,7 @@
 A 2019 remastered version of the project I created in highschool of 2012.
 (Found here: https://github.com/danbiocchi/ResistorColorBandCalculator)
 
-##Old Version: (2012)
+## Old Version: (2012)
 
 ![](https://i.imgur.com/bLZ71if.png)
 ![](https://i.imgur.com/hqOgGUl.png)
@@ -13,7 +13,7 @@ A 2019 remastered version of the project I created in highschool of 2012.
 3. Incorrect input was possible (and exited on incorrect input after error msg)
 
 
-##New Version: (2019)
+## New Version: (2019)
 
 ![](https://i.imgur.com/0mExuVC.png)
 ![](https://i.imgur.com/kddSrF5.png)
