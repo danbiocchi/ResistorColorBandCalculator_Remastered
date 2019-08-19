@@ -2,7 +2,11 @@ package resistor;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,6 +41,8 @@ public class ResistorColorBand{
 	static JPanel multiplierBandPanel;
 	static JPanel toleranceBandPanel;
 	static JPanel tcrBandPanel;
+	static JPanel drawingPanel;
+	static MyDrawing drawingPanelClass;
 	static JButton brownBtn;	// Create buttons Globally to reduce the instances required of each
 	static JButton redBtn;
 	static JButton orangeBtn;
@@ -191,6 +197,7 @@ public class ResistorColorBand{
             	removeAllPanels(frame);
             	frame.add(bandSelectionPanel);
             	bandIdentifier.setText("How many bands on the resistor?");
+        		calculatedResistance.setText("Waiting.. Ω");
             	// Reset variables used in calculations
             	numberOfBands = 0;
                 bandCount = 0;
@@ -222,8 +229,8 @@ public class ResistorColorBand{
 		multiplierBandPanel = new JPanel(new GridLayout(0,2)); // Band 2 or 4
 		toleranceBandPanel = new JPanel(new GridLayout(0,2)); // Band 4 or 5
 		tcrBandPanel = new JPanel(new GridLayout(0,2)); // Band 6
+		drawingPanelClass = new MyDrawing();
 		
-	
 		/*
 		 * ========================================
 		 * NORTH PANEL (Below MenuBar)
@@ -305,6 +312,7 @@ public class ResistorColorBand{
 			    	  bandIdentifier.setText("See calculation below..");
 			    	  System.out.println(Arrays.deepToString(bandArray));
 			    	  calculateResistance(bandArray);
+			    	  showDrawnResistanceBandPanel(frame, numberOfBands, bandArray);
 				  }
 		    	  else {
 		    		  bandArray[bandCount] = actionEvent.getActionCommand();
@@ -721,6 +729,9 @@ public class ResistorColorBand{
 		if(tcrBandPanel.isDisplayable()) {
 			frame.remove(tcrBandPanel);
 		}
+		if(drawingPanelClass.isEnabled()) {
+			frame.remove(drawingPanelClass);
+		}
 		
 		frame.validate();
    	 	frame.repaint();
@@ -795,4 +806,52 @@ public class ResistorColorBand{
 		
 	}
 	
+	static void showDrawnResistanceBandPanel(JFrame frame, int numberOfBands, String[] bandArr) {
+		//drawingPanel.add(comp);
+		drawingPanelClass.setNumberOfBands(numberOfBands);
+		drawingPanelClass.setBandArr(bandArr);
+		frame.add(drawingPanelClass);
+		frame.validate();
+   	 	frame.repaint();
+	}
+	
+	
+	static class MyDrawing extends JPanel {
+	    /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		
+		int numberOfBands;
+		String[] bandArr;
+
+
+		MyDrawing(){
+			numberOfBands = 0;
+		}
+		
+		
+		// Methods, constructors, fields.
+	    @Override public void paintComponent(Graphics g) {
+	         super.paintComponent(g);    // paints background
+	         g.draw3DRect(100, 150, numberOfBands, 50, true);
+	         System.out.println("Number of bands: " + numberOfBands);
+	         System.out.println("Array: " + Arrays.toString(bandArr));
+	         // do your drawing here
+	         
+	    }
+		public int getNumberOfBands() {
+			return numberOfBands;
+		}
+		
+		public void setNumberOfBands(int numberOfBands) {
+			this.numberOfBands = numberOfBands;
+		}
+		public String[] getBandArr() {
+			return bandArr;
+		}
+		public void setBandArr(String[] bandArr) {
+			this.bandArr = bandArr;
+		}
+	}
 }
