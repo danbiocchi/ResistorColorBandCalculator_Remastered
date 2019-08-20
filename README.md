@@ -36,9 +36,9 @@ A 2019 remastered version of the project I created in highschool of 2012.
                      the same place it was before.
 
 - UX/UI - > When the user finishes band selection, the program renders a picture of what the band should look like.
-            Explanation: This feature decreases user error as the user can confirm and compare what was written with the      object that is most likely in hand. If the user finds that the colors don't match up he/she is going to realize an error was made and not take the calculation as correct. This is also a nice visual feature.
+            Explanation: This feature decreases user error as the user can confirm and compare what was written with the      resistor in hand. If the user finds that the colors don't match up with their resistor, he/she is going to realize an error was made, reset the program, and try again for a correct calculation. This is also a nice visual feature.
             
 #### User Interface and User Experience Upcoming enhancements.
-- Currently the reset button is found Under File > Reset. Thus requiring a large mouse movement and 2 clicks. 
-1. In the future a reset button will be added to the bottem of the frame reducing mouse movement and only requiring one click.
-Once this feature is complete it will be the fastest SINGLE USE and MULTI-USE resistance band caluclator found on the interenet (trust me, I looked).
+- Currently the reset button is found Under File > Reset. This requires a large mouse movement and 2 clicks. 
+1. In the future a reset button will be added to the bottom of the frame, reducing mouse movement and only requiring one click.
+Once this feature is complete it will be the fastest SINGLE USE and MULTI-USE resistor band calculator found on the interenet (trust me, I looked).
