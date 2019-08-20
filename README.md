@@ -34,7 +34,7 @@ A 2019 remastered version of the project I created in highschool of 2012.
                      therefore increasing speed of use. If the buttons swapped chaotically as each panel switches, 
                      this would make things more difficult. Keeping them in the same place inreases memory recall through 
                      repetition - when the panel switches the user is able to find the next color since it is already in
-                     the same place it was before.
+                     a similar place as before(If a red button was above blue and on the left side, those buttons will stay in that orientaion throughout each band color selection panel. Red is never under blue or on the right side of the panel. This would create more complexity and make the user remember things like, "oh when entering the second band the red button jumps to this other location and again after that another different location", instead of "red is always on the top left" comparing these two statements it's easy to see the different in complexity).
 
 - UX/UI - > When the user finishes band selection, the program renders a picture of what the band should look like.
             Explanation: This feature decreases user error as the user can confirm and compare what was written with the      resistor in hand. If the user finds that the colors don't match up with their resistor, he/she is going to realize an error was made, reset the program, and try again for a correct calculation. This is also a nice visual feature.
