@@ -62,6 +62,7 @@ public class ResistorColorBand{
 	static Map<String, Double> multiplyBandMap = new HashMap<>();
 	static Map<String, Double> toleranceBandMap = new HashMap<>();
 	static Map<String, Integer> tcrBandMap = new HashMap<>();
+	static Map<String, Color> colorMap = new HashMap<>();
 	
 	// Variables used for calculations
     static int numberOfBands = 0;
@@ -770,7 +771,7 @@ public class ResistorColorBand{
 		digitBandMap.put("green", "5");
 		digitBandMap.put("blue", "6");
 		digitBandMap.put("violet", "7");
-		digitBandMap.put("great", "8");
+		digitBandMap.put("gray", "8");
 		digitBandMap.put("white", "9");
 		
 		// Band 2 or 4
@@ -806,10 +807,23 @@ public class ResistorColorBand{
 		tcrBandMap.put("blue",10);
 		tcrBandMap.put("violet",5);
 		
+		// Colors
+		colorMap.put("black", Color.black);
+		colorMap.put("brown", new Color(101, 67, 33));
+		colorMap.put("red", Color.red);
+		colorMap.put("orange", new Color(255,127,80));
+		colorMap.put("yellow", Color.yellow);
+		colorMap.put("green", Color.green);
+		colorMap.put("blue", Color.blue);
+		colorMap.put("violet", new Color(128,0,128));
+		colorMap.put("gray", Color.gray);
+		colorMap.put("white", Color.white);
+		colorMap.put("gold", new Color(255,215,0));
+		colorMap.put("silver", new Color(192,192,192));
+		
 	}
 	
 	static void showDrawnResistanceBandPanel(JFrame frame, int numberOfBands, String[] bandArr) {
-		//drawingPanel.add(comp);
 		drawingPanelClass.setNumberOfBands(numberOfBands);
 		drawingPanelClass.setBandArr(bandArr);
 		frame.add(drawingPanelClass);
@@ -817,22 +831,17 @@ public class ResistorColorBand{
    	 	frame.repaint();
 	}
 	
-	
+	// Nested class, JPanel for drawing band
 	static class MyDrawing extends JPanel {
-	    /**
-		 * 
-		 */
 		private static final long serialVersionUID = 1L;
-		
+		// Variables
 		int numberOfBands;
 		String[] bandArr;
 
-
+		// Constructor
 		MyDrawing(){
 			numberOfBands = 0;
 		}
-		
-		
 		
 		/*
 		 * ==============================
@@ -880,12 +889,84 @@ public class ResistorColorBand{
 	        		 /*height*/getHeight()*.45, 
 	        		 /*corner rounding*/10.0, 
 	        		 /*corner rounding*/10.0);
-	         //g2d.setColor(Color.red);
 	         g2d.fill(rightBandRect);
 	         
 	         System.out.println("Number of bands: " + numberOfBands);
 	         System.out.println("Array: " + Arrays.toString(bandArr));
 	         // do your drawing here
+	         
+	         // DRAW BANDS
+	         if(numberOfBands >= 3) {
+	        	 // First band
+	        	 System.out.println("Trying to draw band 1: " + numberOfBands);
+	        	 g2d.setColor(colorMap.get(bandArr[0].toLowerCase()));
+	        	 Rectangle2D firstBand = new Rectangle2D.Double(
+		        		 /*left to right*/(getWidth() *.20), 
+			        	/*up an down*/getHeight()*.22, 
+			        	/*width*/getWidth()*.05, 
+			        	/*height*/getHeight()*.45);
+	        	 g2d.fill(firstBand);
+	        	 
+	        	 // Second band
+		         g2d.setColor(colorMap.get(bandArr[1].toLowerCase()));
+		         Rectangle2D secondBand = new Rectangle2D.Double(
+		        		 /*left to right*/(getWidth()*.305), 
+		        		 /*up an down*/getHeight()*.3, 
+		        		 /*width*/(getWidth()*.05), 
+		        		 /*height*/getHeight()*.3);
+		         g2d.fill(secondBand);
+		         
+		         //Third band
+		         g2d.setColor(colorMap.get(bandArr[2].toLowerCase()));
+		         Rectangle2D thirdBand = new Rectangle2D.Double(
+		        		 /*left to right*/(getWidth()*.405), 
+		        		 /*up an down*/getHeight()*.3, 
+		        		 /*width*/(getWidth()*.05), 
+		        		 /*height*/getHeight()*.3);
+		         g2d.fill(thirdBand);
+	        	 
+	         }
+	         
+	       //Fourth band for ONLY 4 bands (requires differnet placement)
+	         if(numberOfBands == 4) {
+		         g2d.setColor(colorMap.get(bandArr[3].toLowerCase()));
+		         Rectangle2D fourthBand = new Rectangle2D.Double(
+		        		 /*left to right*/(getWidth()*.75), 
+		        		 /*up an down*/getHeight()*.22, 
+		        		 /*width*/(getWidth()*.05), 
+		        		 /*height*/getHeight()*.45);
+		         g2d.fill(fourthBand);
+	         }
+	         // Fifth band
+	         else if(numberOfBands > 4) { 
+	        	//Forth band for >4 bands
+		         g2d.setColor(colorMap.get(bandArr[3].toLowerCase()));
+		         Rectangle2D fourthBand = new Rectangle2D.Double(
+		        		 /*left to right*/(getWidth()*.505), 
+		        		 /*up an down*/getHeight()*.3, 
+		        		 /*width*/(getWidth()*.05), 
+		        		 /*height*/getHeight()*.3);
+		         g2d.fill(fourthBand);
+		         // Fifth band
+		         g2d.setColor(colorMap.get(bandArr[4].toLowerCase()));
+		         Rectangle2D fifthBand = new Rectangle2D.Double(
+		        		 /*left to right*/(getWidth()*.645), 
+		        		 /*up an down*/getHeight()*.3, 
+		        		 /*width*/(getWidth()*.05), 
+		        		 /*height*/getHeight()*.3);
+		         g2d.fill(fifthBand);
+	         }
+	         if(numberOfBands == 6) {
+	        	 // Sixth band
+		         g2d.setColor(colorMap.get(bandArr[5].toLowerCase()));
+		         Rectangle2D fifthBand = new Rectangle2D.Double(
+		        		 /*left to right*/(getWidth()*.75), 
+		        		 /*up an down*/getHeight()*.22, 
+		        		 /*width*/(getWidth()*.05), 
+		        		 /*height*/getHeight()*.45);
+		         g2d.fill(fifthBand);
+	         }
+	         
 	         
 	    }
 		public int getNumberOfBands() {
