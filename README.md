@@ -25,7 +25,7 @@ A 2019 remastered version of the project I created in highschool of 2012.
 2. Handles 3, 4, 5 and 6 band resistors.
 3. Incorerct input is IMPOSSIBLE
 
-
+ ### User Interface & User Experience
 - UX - > The selection method for color bands are color buttons with text.
        explanation: This makes selecting easier as most programs would use drop down menus requiring 2 clicks per band   
        selection whereas this program only requires 1. Combined with the color background is a text with the color name. Providing the easiest method of identification for the user providing two memory triggers. (ex. Blue looks blue and blue is "blue"). 
@@ -37,3 +37,8 @@ A 2019 remastered version of the project I created in highschool of 2012.
                      as it is already in a similar place it was found before.
 - UX/UI - > When the user finished band selection the program renders a picture of what the band should look like.
             explanation: This feature decreases user error as the user can confirm and compare what was written with the      object that is most likely in hand. If the user finds that the colors don't match up he/she is going to realize an error was made and not take the calculation as correct. This is also a nice visual feature.
+            
+#### User Interface and User Experience Upcoming enhancements.
+- Currently the reset button is found Under File > Reset. Thus requiring a large mouse movement and 2 clicks. 
+1. In the future a reset button will be added to the bottem of the frame reducing mouse movement and only requiring one click.
+Once this feature is complete it will be the fastest SINGLE USE and MULTI-USE resistance band caluclator found on the interenet (trust me, I looked).
