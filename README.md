@@ -29,14 +29,14 @@ A 2019 remastered version of the project I created in highschool of 2012.
        selection whereas this program only requires 1. Two memory triggers - a colored background that matches the color name - provide the easiest method of identification for the user (i.e. Blue looks blue and blue is "blue"). In addition, on the darker colors where text may not be as readible, the text has been made a lighter color to ensure perfect readbility.
 
 - UX - > All color buttons on the left side of the pane stay on the left side and right stays on right.
-       explanation : This makes it easier for the user to spot the colors faster decreasings search time
-                     therefore increasing use speed. If the buttons swapped chaotically on each panel switch
-                     this would make things more difficult. Keeping them the same inreases memory recal through 
-                     repition thus when the panel switchs the user has an easier time finding the next color
-                     as it is already in a similar place it was found before.
+       Explanation : This makes it easy for the user to spot the colors quickly, decreasings search time and 
+                     therefore increasing speed of use. If the buttons swapped chaotically as each panel switches, 
+                     this would make things more difficult. Keeping them in the same place inreases memory recall through 
+                     repetition - when the panel switches the user is able to find the next color since it is already in
+                     the same place it was before.
 
-- UX/UI - > When the user finished band selection the program renders a picture of what the band should look like.
-            explanation: This feature decreases user error as the user can confirm and compare what was written with the      object that is most likely in hand. If the user finds that the colors don't match up he/she is going to realize an error was made and not take the calculation as correct. This is also a nice visual feature.
+- UX/UI - > When the user finishes band selection, the program renders a picture of what the band should look like.
+            Explanation: This feature decreases user error as the user can confirm and compare what was written with the      object that is most likely in hand. If the user finds that the colors don't match up he/she is going to realize an error was made and not take the calculation as correct. This is also a nice visual feature.
             
 #### User Interface and User Experience Upcoming enhancements.
 - Currently the reset button is found Under File > Reset. Thus requiring a large mouse movement and 2 clicks. 
