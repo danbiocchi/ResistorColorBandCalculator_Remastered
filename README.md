@@ -28,7 +28,8 @@ A 2019 remastered version of the project I created in highschool of 2012.
        Explanation: This makes selecting easier as most programs would use drop down menus requiring 2 clicks per band   
        selection whereas this program only requires 1. Two memory triggers - a colored background that matches the color name - provide the easiest method of identification for the user (i.e. Blue looks blue and blue is "blue"). In addition, on the darker colors where text may not be as readible, the text has been made a lighter color to ensure perfect readbility.
 
-- UX - > All color buttons on the left side of the pane stay on the left side and right stays on right.
+- UX - > All color buttons on the left side of the pane stay on the left side and right stays on right. The order in which
+       they appear is also as similar as can be. As Some bands have different color ranges.
        Explanation : This makes it easy for the user to spot the colors quickly, decreasings search time and 
                      therefore increasing speed of use. If the buttons swapped chaotically as each panel switches, 
                      this would make things more difficult. Keeping them in the same place inreases memory recall through 
