@@ -26,13 +26,15 @@ A 2019 remastered version of the project I created in highschool of 2012.
  ### User Interface & User Experience
 - UX - > The selection method for color bands are color buttons with text.
        Explanation: This makes selecting easier as most programs would use drop down menus requiring 2 clicks per band   
-       selection whereas this program only requires 1. Combined with the color background is a text with the color name. Providing the easiest method of identification for the user providing two memory triggers. (ex. Blue looks blue and blue is "blue"). Additionally the darker colors where the text is not as readible the text has been changed to a lighter color, ensuring perfect readbility.
+       selection whereas this program only requires 1. Two memory triggers - a colored background that matches the color name - provide the easiest method of identification for the user (i.e. Blue looks blue and blue is "blue"). In addition, on the darker colors where text may not be as readible, the text has been made a lighter color to ensure perfect readbility.
+
 - UX - > All color buttons on the left side of the pane stay on the left side and right stays on right.
        explanation : This makes it easier for the user to spot the colors faster decreasings search time
                      therefore increasing use speed. If the buttons swapped chaotically on each panel switch
                      this would make things more difficult. Keeping them the same inreases memory recal through 
                      repition thus when the panel switchs the user has an easier time finding the next color
                      as it is already in a similar place it was found before.
+
 - UX/UI - > When the user finished band selection the program renders a picture of what the band should look like.
             explanation: This feature decreases user error as the user can confirm and compare what was written with the      object that is most likely in hand. If the user finds that the colors don't match up he/she is going to realize an error was made and not take the calculation as correct. This is also a nice visual feature.
             
