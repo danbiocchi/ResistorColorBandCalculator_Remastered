@@ -19,8 +19,6 @@ A 2019 remastered version of the project I created in highschool of 2012.
 ![](https://i.imgur.com/sT7IIqP.png)
 ![](https://i.imgur.com/KaywNHC.png)
 
-[Unfinished feature: band drawing - see enhancements sections]
-
 1. Button based (single use time FAST)
 2. Handles 3, 4, 5 and 6 band resistors.
 3. Incorrect input is IMPOSSIBLE
