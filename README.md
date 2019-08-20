@@ -28,7 +28,7 @@ A 2019 remastered version of the project I created in highschool of 2012.
  ### User Interface & User Experience
 - UX - > The selection method for color bands are color buttons with text.
        explanation: This makes selecting easier as most programs would use drop down menus requiring 2 clicks per band   
-       selection whereas this program only requires 1. Combined with the color background is a text with the color name. Providing the easiest method of identification for the user providing two memory triggers. (ex. Blue looks blue and blue is "blue"). 
+       selection whereas this program only requires 1. Combined with the color background is a text with the color name. Providing the easiest method of identification for the user providing two memory triggers. (ex. Blue looks blue and blue is "blue"). Additionally the darker colors where the text is not as readible the text has been changed to a lighter color, ensuring perfect readbility.
 - UX - > All color buttons on the left side of the pane stay on the left side and right stays on right.
        explanation : This makes it easier for the user to spot the colors faster decreasings search time
                      therefore increasing use speed. If the buttons swapped chaotically on each panel switch
