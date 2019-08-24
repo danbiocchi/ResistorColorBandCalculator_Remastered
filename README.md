@@ -43,3 +43,11 @@ A 2019 remastered version of the project I created in highschool of 2012.
 - Currently the reset button is found Under File > Reset. This requires a large mouse movement and 2 clicks. 
 1. In the future a reset button will be added to the bottom of the frame, reducing mouse movement and only requiring one click.
 Once this feature is complete it will be the fastest SINGLE USE and MULTI-USE resistor band calculator found on the interenet (trust me, I looked).
+
+
+#### Programming Changes
+
+Since there is 100 lines on just button creation and styling it would be better to create a ColorButton class which receives name of button and button color. Also it should automaically apply some of the other styling options. 
+For now its only apparent that this should be done with JButton.
+
+Code cleanup and restructoring with things like this - to make the main class cleaner - will take place after I finish a react application.
