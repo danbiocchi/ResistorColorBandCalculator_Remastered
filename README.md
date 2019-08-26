@@ -50,4 +50,6 @@ Once this feature is complete it will be the fastest SINGLE USE and MULTI-USE re
 Since there is 100 lines on just button creation and styling it would be better to create a ColorButton class which receives name of button and button color. Also it should automaically apply some of the other styling options. 
 For now its only apparent that this should be done with JButton.
 
+
+
 Code cleanup and restructoring with things like this - to make the main class cleaner - will take place after I finish a react application.
