@@ -1,6 +1,4 @@
 # ResistorColorBandCalculator_Remastered
-## (2019)
-
 ![](https://i.imgur.com/0mExuVC.png)
 ![](https://i.imgur.com/sT7IIqP.png)
 ![](https://i.imgur.com/KaywNHC.png)
@@ -9,21 +7,12 @@
 2. Handles 3, 4, 5 and 6 band resistors.
 3. Incorrect input is IMPOSSIBLE
 
- ### User Interface & User Experience
-- UX - > The selection method for color bands are color buttons with text.
-       Explanation: This makes selecting easier as most programs would use drop down menus requiring 2 clicks per band   
-       selection whereas this program only requires 1. Two memory triggers - a colored background that matches the color name - provide the easiest method of identification for the user (i.e. Blue looks blue and blue is "blue"). In addition, on the darker colors where text may not be as readible, the text has been made a lighter color to ensure perfect readbility.
 
-- UX - > All color buttons on the left side of the pane stay on the left side and right stays on right. The order in which
-       they appear is also as similar as can be. As Some bands have different color ranges.
-       Explanation : This makes it easy for the user to spot the colors quickly, decreasings search time and 
-                     therefore increasing speed of use. If the buttons swapped chaotically as each panel switches, 
-                     this would make things more difficult. Keeping them in the same place inreases memory recall through 
-                     repetition - when the panel switches the user is able to find the next color since it is already in
-                     a similar place as before(If a red button was above blue and on the left side, those buttons will stay in that orientaion throughout each band color selection panel. Red is never under blue or on the right side of the panel. This would create more complexity and make the user remember things like, "oh when entering the second band the red button jumps to this other location and again after that another different location", instead of "red is always on the top left" comparing these two statements it's easy to see the different in complexity).
-
-- UX/UI - > When the user finishes band selection, the program renders a picture of what the band should look like.
-            Explanation: This feature decreases user error as the user can confirm and compare what was written with the      resistor in hand. If the user finds that the colors don't match up with their resistor, he/she is going to realize an error was made, reset the program, and try again for a correct calculation. This is also a nice visual feature.
+# Features
+1. Simple color coded button selection.
+2. Covers all bands (3,4,5 and 6)
+3. Displays resistance calculation with proper unit.
+4. Display picture of inputted resistor.
             
 #### User Interface and User Experience Upcoming enhancements.
 - Currently the reset button is found Under File > Reset. This requires a large mouse movement and 2 clicks. 
